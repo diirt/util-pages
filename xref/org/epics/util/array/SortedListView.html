@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>SortedListView xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../apidocs/org/epics/util/array/SortedListView.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   <em class="jxr_javadoccomment"> * Copyright (C) 2012-14 epics-util developers. See COPYRIGHT.TXT</em>
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_javadoccomment"> * All rights reserved. Use is subject to license terms. See LICENSE.TXT</em>
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">package</strong> org.epics.util.array;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> * A sorted view of a list.</em>
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> *</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_javadoccomment"> * @author carcassi</em>
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../org/epics/util/array/ListDouble.html">ListDouble</a> {
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> values;
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/epics/util/array/ListInt.html">ListInt</a> indexes;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong>[] indexArray;
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>      <a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a>(<a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> values) {
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>          <strong class="jxr_keyword">this</strong>.values = values;
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>          indexArray = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[values.size()];
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; indexArray.length; i++) {
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>              indexArray[i] = i;
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>          }
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>          <strong class="jxr_keyword">this</strong>.indexes = <strong class="jxr_keyword">new</strong> <a href="../../../../org/epics/util/array/ArrayInt.html">ArrayInt</a>(indexArray);
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>      }
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>      <a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a>(<a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> values, <a href="../../../../org/epics/util/array/ListInt.html">ListInt</a> indexes) {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>          <strong class="jxr_keyword">this</strong>.values = values;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>          <strong class="jxr_keyword">this</strong>.indexes = indexes;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>          <strong class="jxr_keyword">this</strong>.indexArray = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>      }
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      @Override
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong> getDouble(<strong class="jxr_keyword">int</strong> index) {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>          <strong class="jxr_keyword">return</strong> values.getDouble(indexes.getInt(index));
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      }
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>      @Override
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> size() {
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>          <strong class="jxr_keyword">return</strong> values.size();
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>      }
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">void</strong> exhange(<strong class="jxr_keyword">int</strong> i, <strong class="jxr_keyword">int</strong> j) {
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>          <strong class="jxr_keyword">int</strong> b = indexArray[i];
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>          indexArray[i] = indexArray[j];
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>          indexArray[j] = b;
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      }
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment">     * Returns the index map of the sorted view.</em>
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  <em class="jxr_javadoccomment">     * @return a list of integers</em>
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/epics/util/array/ListInt.html">ListInt</a> getIndexes() {
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">return</strong> indexes;
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>      }
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment">     * Quick-sort the view. The original list is left alone,</em>
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <em class="jxr_javadoccomment">     * and the internal list is modified.</em>
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     * @param list the view to sort</em>
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> quicksort(<a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a> list) {
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>          quicksort(list, 0, list.size() - 1);
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      }
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>  
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> quicksort(<a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a> list, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> right) {
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <strong class="jxr_keyword">if</strong> (right &lt;= left) {
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>              <strong class="jxr_keyword">return</strong>;
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          }
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">int</strong> i = partition(list, left, right);
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>          quicksort(list, left, i - 1);
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>          quicksort(list, i + 1, right);
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>  
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_comment">// partition a[left] to a[right], assumes left &lt; right</em>
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">int</strong> partition(<a href="../../../../org/epics/util/array/SortedListView.html">SortedListView</a> list,
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>              <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> right) {
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">int</strong> i = left - 1;
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">int</strong> j = right;
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">while</strong> (<strong class="jxr_keyword">true</strong>) {
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>              <strong class="jxr_keyword">while</strong> (less(list.getDouble(++i), list.getDouble(right)))      <em class="jxr_comment">// find item on left to swap</em>
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>              ;                               <em class="jxr_comment">// a[right] acts as sentinel</em>
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">while</strong> (less(list.getDouble(right), list.getDouble(--j))) <em class="jxr_comment">// find item on right to swap</em>
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>              {
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>                  <strong class="jxr_keyword">if</strong> (j == left) {
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>                      <strong class="jxr_keyword">break</strong>;           <em class="jxr_comment">// don't go out-of-bounds</em>
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>                  }
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>              }
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>              <strong class="jxr_keyword">if</strong> (i &gt;= j) {
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>                  <strong class="jxr_keyword">break</strong>;                  <em class="jxr_comment">// check if pointers cross</em>
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>              }
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>              list.exhange(i, j);               <em class="jxr_comment">// swap two elements into place</em>
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>          }
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>          list.exhange(i, right);               <em class="jxr_comment">// swap with partition element</em>
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">return</strong> i;
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>      }
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>  
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>     <em class="jxr_comment">// is x &lt; y ?</em>
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">boolean</strong> less(<strong class="jxr_keyword">double</strong> x, <strong class="jxr_keyword">double</strong> y) {
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">return</strong> (x &lt; y);
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>     }
+<a class="jxr_linenumber" name="L104" href="#L104">104</a> 
+<a class="jxr_linenumber" name="L105" href="#L105">105</a> }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2014. All rights reserved.</div>
+</body>
+</html>
