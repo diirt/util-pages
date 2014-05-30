@@ -227,7 +227,22 @@
 <a class="jxr_linenumber" name="L219" href="#L219">219</a>         assertThat(result.getColumnValues().get(1), equalTo((Object) <strong class="jxr_keyword">new</strong> ArrayDouble(Double.NaN, 1.456, 234567891234.0, 0.000000123, 123)));
 <a class="jxr_linenumber" name="L220" href="#L220">220</a>         assertThat(result.getColumnValues().get(2), equalTo((Object) <strong class="jxr_keyword">new</strong> ArrayDouble(Double.NaN,2,3,4,5)));
 <a class="jxr_linenumber" name="L221" href="#L221">221</a>     }
-<a class="jxr_linenumber" name="L222" href="#L222">222</a> }
+<a class="jxr_linenumber" name="L222" href="#L222">222</a>     
+<a class="jxr_linenumber" name="L223" href="#L223">223</a>     @Test
+<a class="jxr_linenumber" name="L224" href="#L224">224</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> parseTable9CSV() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L225" href="#L225">225</a>         CsvParserResult result = CsvParser.AUTOMATIC.parse(<strong class="jxr_keyword">new</strong> InputStreamReader(getClass().getResource(<span class="jxr_string">"table9.csv"</span>).openStream()));
+<a class="jxr_linenumber" name="L226" href="#L226">226</a>         assertThat(result.getColumnNames().size(), equalTo(3));
+<a class="jxr_linenumber" name="L227" href="#L227">227</a>         assertThat(result.getColumnNames().get(0), equalTo(<span class="jxr_string">"A"</span>));
+<a class="jxr_linenumber" name="L228" href="#L228">228</a>         assertThat(result.getColumnNames().get(1), equalTo(<span class="jxr_string">"B"</span>));
+<a class="jxr_linenumber" name="L229" href="#L229">229</a>         assertThat(result.getColumnNames().get(2), equalTo(<span class="jxr_string">"C"</span>));
+<a class="jxr_linenumber" name="L230" href="#L230">230</a>         assertThat((Object) result.getColumnTypes().get(0), equalTo((Object) String.<strong class="jxr_keyword">class</strong>));
+<a class="jxr_linenumber" name="L231" href="#L231">231</a>         assertThat((Object) result.getColumnTypes().get(1), equalTo((Object) <strong class="jxr_keyword">double</strong>.<strong class="jxr_keyword">class</strong>));
+<a class="jxr_linenumber" name="L232" href="#L232">232</a>         assertThat((Object) result.getColumnTypes().get(2), equalTo((Object) <strong class="jxr_keyword">double</strong>.<strong class="jxr_keyword">class</strong>));
+<a class="jxr_linenumber" name="L233" href="#L233">233</a>         assertThat(result.getColumnValues().get(0), equalTo((Object) Arrays.asList(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>, <span class="jxr_string">"c"</span>, <span class="jxr_string">""</span>, <span class="jxr_string">"e"</span>)));
+<a class="jxr_linenumber" name="L234" href="#L234">234</a>         assertThat(result.getColumnValues().get(1), equalTo((Object) <strong class="jxr_keyword">new</strong> ArrayDouble(1, Double.NaN, Double.NaN, 4, Double.NaN)));
+<a class="jxr_linenumber" name="L235" href="#L235">235</a>         assertThat(result.getColumnValues().get(2), equalTo((Object) <strong class="jxr_keyword">new</strong> ArrayDouble(1,2,3, Double.NaN, Double.NaN)));
+<a class="jxr_linenumber" name="L236" href="#L236">236</a>     }
+<a class="jxr_linenumber" name="L237" href="#L237">237</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2014. All rights reserved.</div>
