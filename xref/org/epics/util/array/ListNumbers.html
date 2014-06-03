@@ -189,8 +189,8 @@
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> <em class="jxr_javadoccomment">     * Note that this method is really strict, and it may rule out cases</em>
 <a class="jxr_linenumber" name="L182" href="#L182">182</a> <em class="jxr_javadoccomment">     * that may be considered to be linear.</em>
 <a class="jxr_linenumber" name="L183" href="#L183">183</a> <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="L184" href="#L184">184</a> <em class="jxr_javadoccomment">     * @param listNumber a list</em>
-<a class="jxr_linenumber" name="L185" href="#L185">185</a> <em class="jxr_javadoccomment">     * @return true if linear</em>
+<a class="jxr_linenumber" name="L184" href="#L184">184</a> <em class="jxr_javadoccomment">     * @param listNumber</em>
+<a class="jxr_linenumber" name="L185" href="#L185">185</a> <em class="jxr_javadoccomment">     * @return true if the elements of the list are equally spaced</em>
 <a class="jxr_linenumber" name="L186" href="#L186">186</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">boolean</strong> isLinear(<a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> listNumber) {
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>         <strong class="jxr_keyword">if</strong> (listNumber instanceof LinearListDouble || listNumber instanceof LinearListDoubleFromRange) {
@@ -282,7 +282,32 @@
 <a class="jxr_linenumber" name="L274" href="#L274">274</a>                 <strong class="jxr_keyword">return</strong> size;
 <a class="jxr_linenumber" name="L275" href="#L275">275</a>             }
 <a class="jxr_linenumber" name="L276" href="#L276">276</a>     }
-<a class="jxr_linenumber" name="L277" href="#L277">277</a> }
+<a class="jxr_linenumber" name="L277" href="#L277">277</a>     
+<a class="jxr_linenumber" name="L278" href="#L278">278</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L279" href="#L279">279</a> <em class="jxr_javadoccomment">     * Returns a view of the given list that presents only the elements</em>
+<a class="jxr_linenumber" name="L280" href="#L280">280</a> <em class="jxr_javadoccomment">     * at the given indexes.</em>
+<a class="jxr_linenumber" name="L281" href="#L281">281</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="L282" href="#L282">282</a> <em class="jxr_javadoccomment">     * @param list a numeric list</em>
+<a class="jxr_linenumber" name="L283" href="#L283">283</a> <em class="jxr_javadoccomment">     * @param indexes the indexes with the values to expose</em>
+<a class="jxr_linenumber" name="L284" href="#L284">284</a> <em class="jxr_javadoccomment">     * @return a wrapper around list</em>
+<a class="jxr_linenumber" name="L285" href="#L285">285</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L286" href="#L286">286</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> listView(<a href="../../../../org/epics/util/array/ListNumber.html">ListNumber</a> list, <a href="../../../../org/epics/util/array/ListInt.html">ListInt</a> indexes) {
+<a class="jxr_linenumber" name="L287" href="#L287">287</a>         <strong class="jxr_keyword">if</strong> (list instanceof ListDouble) {
+<a class="jxr_linenumber" name="L288" href="#L288">288</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Double((ListDouble) list, indexes);
+<a class="jxr_linenumber" name="L289" href="#L289">289</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (list instanceof ListFloat) {
+<a class="jxr_linenumber" name="L290" href="#L290">290</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Float((ListFloat) list, indexes);
+<a class="jxr_linenumber" name="L291" href="#L291">291</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (list instanceof ListLong) {
+<a class="jxr_linenumber" name="L292" href="#L292">292</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Long((ListLong) list, indexes);
+<a class="jxr_linenumber" name="L293" href="#L293">293</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (list instanceof ListInt) {
+<a class="jxr_linenumber" name="L294" href="#L294">294</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Int((ListInt) list, indexes);
+<a class="jxr_linenumber" name="L295" href="#L295">295</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (list instanceof ListShort) {
+<a class="jxr_linenumber" name="L296" href="#L296">296</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Short((ListShort) list, indexes);
+<a class="jxr_linenumber" name="L297" href="#L297">297</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (list instanceof ListByte) {
+<a class="jxr_linenumber" name="L298" href="#L298">298</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ListView.Byte((ListByte) list, indexes);
+<a class="jxr_linenumber" name="L299" href="#L299">299</a>         }
+<a class="jxr_linenumber" name="L300" href="#L300">300</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> UnsupportedOperationException(<span class="jxr_string">"Not yet supported"</span>);
+<a class="jxr_linenumber" name="L301" href="#L301">301</a>     }
+<a class="jxr_linenumber" name="L302" href="#L302">302</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2014. All rights reserved.</div>
